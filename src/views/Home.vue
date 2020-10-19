@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 text-center>Bienvenue sur Licha !</h1>
+    <h1>Bienvenue sur Licha !</h1>
     <p>
       Chattez simplement avec une personne de votre choix, de manière chiffrée et sécurisée.
     </p>
@@ -8,13 +8,13 @@
       v-model="tab"
       grow
     >
-      <v-tab key="login">Se connecter</v-tab>
       <v-tab key="signup">S'inscrire</v-tab>
+      <v-tab key="login">Se connecter</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item key="login"><Login /></v-tab-item>
       <v-tab-item key="signup"><Signup /></v-tab-item>
+      <v-tab-item key="login"><Login /></v-tab-item>
     </v-tabs-items>
   </div>
 </template>
