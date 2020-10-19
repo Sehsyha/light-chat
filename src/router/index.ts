@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '@/views/Home.vue'
+
+import Chat from '@/views/Chat.vue'
 import ChooseUser from '@/views/ChooseUser.vue'
+import Home from '@/views/Home.vue'
+import WaitOnUser from '@/views/WaitOnUser.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +18,16 @@ const routes: Array<RouteConfig> = [
     path: '/choose-user',
     name: 'choose-user',
     component: ChooseUser
+  },
+  {
+    path: '/wait-on-user',
+    name: 'wait-on-user',
+    component: WaitOnUser
+  },
+  {
+    path: '/chat',
+    name: 'chat',
+    component: Chat
   }
 ]
 
