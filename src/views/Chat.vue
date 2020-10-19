@@ -7,8 +7,8 @@
         </v-chip>
       </v-list-item>
     </v-list>
-    <v-footer absolute>
-      <v-text-field label="Message"></v-text-field>
+    <v-footer absolute class="secondary">
+      <v-text-field v-model="newMessage" block @change="sendMessage" label="Message"/>
     </v-footer>
   </div>
 </template>
@@ -26,6 +26,7 @@ interface Message {
 @Component
 export default class Chat extends Vue {
   public username = 'Kroustille'
+  public newMessage = ''
   public messages: Message[] = []
 
   mounted () {
@@ -36,6 +37,13 @@ export default class Chat extends Vue {
 
   public isSameUser (message: Message) {
     return this.username === message.username
+  }
+
+  public sendMessage (text?: string) {
+    if (text) {
+      this.newMessage = ''
+      this.messages.push({ username: this.username, text, id: '111' })
+    }
   }
 }
 </script>
