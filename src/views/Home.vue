@@ -1,18 +1,39 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1 text-center>Bienvenue sur Licha !</h1>
+    <p>
+      Chattez simplement avec une personne de votre choix, de manière chiffrée et sécurisée.
+    </p>
+    <v-tabs
+      v-model="tab"
+      grow
+    >
+      <v-tab key="login">Se connecter</v-tab>
+      <v-tab key="signup">S'inscrire</v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item key="login"><Login /></v-tab-item>
+      <v-tab-item key="signup"><Signup /></v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
-export default {
-  name: 'Home',
+import Login from '@/components/Login.vue'
+import Signup from '@/components/Signup.vue'
+
+@Component({
   components: {
-    HelloWorld
+    Login,
+    Signup
   }
+})
+export default class Home extends Vue {
+  public tab: number | null = null
+  public items = new Map<string, Vue>();
 }
 </script>
