@@ -8,12 +8,15 @@
       </v-list-item>
     </v-list>
     <v-footer absolute class="secondary">
-      <v-text-field v-model="newMessage" block @change="sendMessage" label="Message"/>
+      <v-text-field v-model="newMessage" block @keyup="handleMessage" label="Message"/>
+      <v-btn @click="toggleEmojiPicker">Emoji</v-btn>
+      <VEmojiPicker v-show="displayEmojiPicker" @select="selectEmoji" />
     </v-footer>
   </div>
 </template>
 
 <script lang="ts">
+import { Emoji } from 'v-emoji-picker/lib/models/Emoji'
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
@@ -28,6 +31,7 @@ export default class Chat extends Vue {
   public username = 'Kroustille'
   public newMessage = ''
   public messages: Message[] = []
+  public displayEmojiPicker = false
 
   mounted () {
     this.messages.push({ username: 'Kroustille', text: 'Hello', id: '666' })
@@ -39,11 +43,22 @@ export default class Chat extends Vue {
     return this.username === message.username
   }
 
-  public sendMessage (text?: string) {
-    if (text) {
-      this.newMessage = ''
+  public handleMessage (e: KeyboardEvent) {
+    if (e.keyCode === 13 && this.newMessage) {
+      const text = this.newMessage
       this.messages.push({ username: this.username, text, id: '111' })
+      this.newMessage = ''
+      this.displayEmojiPicker = false
     }
+  }
+
+  public selectEmoji (emoji: Emoji) {
+    this.newMessage += emoji.data
+    this.displayEmojiPicker = false
+  }
+
+  public toggleEmojiPicker () {
+    this.displayEmojiPicker = !this.displayEmojiPicker
   }
 }
 </script>
